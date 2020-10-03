@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'next_page.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -9,12 +11,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => MyHomePage(),
+          '/next': (context) => NextPage(),
+        });
   }
 }
 
@@ -40,23 +45,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("KOBYのFlutter大学！！"),
-        actions: <Widget>[
-          Icon(Icons.add),
-          Icon(Icons.share),
-        ],
       ),
-      body: Container(
-          height: double.infinity,
-          width: 100,
-          color: Colors.red,
-          padding: EdgeInsets.all(50.0),
-          child: Row(
-            children: <Widget>[
-              Text('とてもわかる'),
-              Text('とてもわかる'),
-              Text('とてもわかる'),
-            ],
-          )),
+      body: Center(
+        child: RaisedButton(
+          child: Text('次へ'),
+          onPressed: () {
+            Navigator.pushNamed(context, '/next');
+          },
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
